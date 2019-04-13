@@ -26,7 +26,7 @@ AND = 'AND'
 ORR = 'ORR'
 ETIQ = 'ETIQ'
 PUSH = 'PUSH'
-POP  = 'POP'
+POP = 'POP'
 
 
 class Lexeme:
@@ -55,16 +55,16 @@ class Lexeme:
             self.type = ORR
         elif type == 'PUSH':
             self.type = PUSH
-            valeur = valeur.replace('{','').replace('}','')
+            valeur = valeur.replace('{', '').replace('}', '')
         elif type == 'POP':
             self.type = POP
-            valeur = valeur.replace('{','').replace('}','')
+            valeur = valeur.replace('{', '').replace('}', '')
         elif type == 'LDR':
             self.type = LDR
-            valeur = valeur.replace('[','').replace(']','')
+            valeur = valeur.replace('[', '').replace(']', '')
         elif type == 'STR':
             self.type = STR
-            valeur = valeur.replace('[','').replace(']','')
+            valeur = valeur.replace('[', '').replace(']', '')
         elif ':' in type:
             self.type = ETIQ
             etq = re.search(regex_etiquette, type).group(0)
@@ -130,17 +130,16 @@ def LireFichier(path):
         with open(path, 'r') as f:
             for line in f.readlines():
                 line = re.sub(regex_comment, r'', line)
-                line= line.lstrip()
+                line = line.lstrip()
                 if(':' in line):
                     twoLines = line.split(':')
                     CODE.append(twoLines[0]+':')
                     CODE.append(twoLines[1][1:])
                     continue
                 CODE.append(line)
-    except :
+    except:
         print("An error has occured while reading the file")
         exit()
-    
 
 
 def afficher_lexemes(lexemes):
@@ -151,7 +150,7 @@ def afficher_lexemes(lexemes):
 
 
 def toNum(x):
-            return int(x[1:])
+    return int(x[1:])
 
 
 def Analyse_Lex():
@@ -174,7 +173,7 @@ def Analyse_Lex():
 
 def checkNum(x):
     if('#' in x):
-            return (x[1:])
+        return (x[1:])
     else:
         return x
 
@@ -199,28 +198,28 @@ def indexOfEtiq(id):
 
 
 def eval(x, y, z, op):
-        if('#' in z):
-            z = toNum(z)
-        else:
-            z = REGISTRES[z]
-        if('#' in y):
-            y = toNum(y)
-        else:
-            y = REGISTRES[y]
-        if  op == '+':
-            REGISTRES.update({x: int(y)+int(z)})
-        elif op == '-':
-            REGISTRES.update({x: int(y)-int(z)})
-        elif op == '*':
-            REGISTRES.update({x: int(y)*int(z)})
-        elif op == 'LSL':
-            REGISTRES.update({x: int(y)*(2 ^ int(z))})
-        elif op == 'LSR':
-            REGISTRES.update({x: int(y)/(2 ^ int(z))})
-        elif op == '&':
-            REGISTRES.update({x: int(y) and (int(z))})
-        elif op == '|':
-            REGISTRES.update({x: int(y)or(int(z))})
+    if('#' in z):
+        z = toNum(z)
+    else:
+        z = REGISTRES[z]
+    if('#' in y):
+        y = toNum(y)
+    else:
+        y = REGISTRES[y]
+    if op == '+':
+        REGISTRES.update({x: int(y)+int(z)})
+    elif op == '-':
+        REGISTRES.update({x: int(y)-int(z)})
+    elif op == '*':
+        REGISTRES.update({x: int(y)*int(z)})
+    elif op == 'LSL':
+        REGISTRES.update({x: int(y)*(2 ^ int(z))})
+    elif op == 'LSR':
+        REGISTRES.update({x: int(y)/(2 ^ int(z))})
+    elif op == '&':
+        REGISTRES.update({x: int(y) and (int(z))})
+    elif op == '|':
+        REGISTRES.update({x: int(y)or(int(z))})
 
 
 def mov(inst):
@@ -249,6 +248,7 @@ def beq():
 
 def bal(index):
     Execute(index)
+
 
 def Execute(startFrom=0):
     global REGISTRES
