@@ -69,11 +69,8 @@ class Lexeme:
             self.type = ETIQ
             etq = re.search(regex_etiquette, type).group(0)
             valeur = etq[:-1]
-        elif '@' in type:
-            self.type = COMMENT
         else:
-            print("Lexical Error")
-            exit()
+            self.type = COMMENT
         valeur = valeur.replace('\n', '')
         self.valeur = (valeur).replace(' ', '')
 
