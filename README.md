@@ -71,6 +71,7 @@ Output:
 
 ```
 Could not execute the instruction at line: 3
+Non-functional instruction: ' ['MOV', ['r2', '#']] '
 ```
 
 | 🛑 WARNING 🛑|
