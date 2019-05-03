@@ -128,13 +128,14 @@ def LireFichier(path):
     global CODE
     try:
         with open(path, 'r') as f:
-            for line in f.readlines():
+            lines = f.readlines()
+            for line in lines:
                 line = re.sub(regex_comment, r'', line)
                 line = line.lstrip()
                 if(':' in line):
                     twoLines = line.split(':')
                     CODE.append(twoLines[0]+':')
-                    CODE.append(twoLines[1][1:])
+                    CODE.append(twoLines[1])
                     continue
                 CODE.append(line)
     except:
@@ -308,10 +309,10 @@ def main():
         Execute()
     except:
         print("Could not execute the instruction at line:", LINE)
-        print("Non-functional instruction: '",INSTRUCTIONS[LINE-1],"'")
+        print("Non-functional instruction: '", INSTRUCTIONS[LINE-1], "'")
         exit()
-    for r in REGISTRES:
-        print(r, '=', REGISTRES[r])
+        for r in REGISTRES:
+            print(r, '=', REGISTRES)
 
 
 if __name__ == "__main__":
