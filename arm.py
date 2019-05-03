@@ -308,6 +308,7 @@ def main():
         Execute()
     except:
         print("Could not execute the instruction at line:", LINE)
+        print("Non-functional instruction: '",INSTRUCTIONS[LINE-1],"'")
         exit()
     for r in REGISTRES:
         print(r, '=', REGISTRES[r])
